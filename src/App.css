@@ -1,0 +1,19 @@
+.hero img{
+    border: 1px solid red;
+    max-width: 100%;
+    height: auto;
+    
+}
+
+
+.homepageGridHeader{
+    border: 1px solid red;
+    width: 100%;
+    height: 100px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
