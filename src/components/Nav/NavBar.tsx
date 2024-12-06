@@ -20,10 +20,10 @@ const NavBar: React.FC<{}> = () => {
 
       <div className={styles['links-container']}>
         {
-          links.map((link: Link)=>{
+          links.map((link: Link,index)=>{
             return (
-              <div key={link.id} className={styles['link']}>
-                  {console.log("The current value iterated in link is: " + JSON.stringify(link))}                <a href={link.href}>
+              <div key={index} className={styles['link']}>
+                <a href={link.href}>
                   {link.label}
                 </a>
               </div>

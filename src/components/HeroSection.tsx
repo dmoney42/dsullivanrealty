@@ -12,11 +12,7 @@ const HeroSection = () => {
       <img src={HeroImage2} alt="house hero image" />
     </section>
 
-    <div className="homepageGridHeader">
-      <h2>Our Most Exclusive</h2>
-      <p>Choose your future destiny</p>
 
-    </div>
 
 
     </>

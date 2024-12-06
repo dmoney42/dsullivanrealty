@@ -1,21 +1,21 @@
 import React from 'react'
-import {Routes, Route} from 'react-router-dom'
-import './App.css'
-import NavBar from './components/Nav/NavBar'
-import HeroSection from './components/HeroSection'
-import Home from './pages/Home.jsx'
-
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import Home from './pages/Home';
 function App() {
   
 
   return (
     <>
-      <NavBar/>
-      <HeroSection/>
-      <div>
-        <p>This is the start of our program</p>
-      </div>
-
+     <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Home/>}/>
+          {/*
+          <Route path='/about' element={<Home/>}/>
+          <Route path='/properties' element={<Home/>}/>
+          <Route path='/contact' element={<Home/>}/>
+          */}
+        </Routes>
+     </BrowserRouter>
    
     </>
   )
