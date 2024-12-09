@@ -76,14 +76,7 @@ const Home = () => {
           }) //end of map
         }
 
-            <div className="imageCarousel">
-                <img src={`${pathToImagesFolderFromHere}${images[currentImageIndex].src}`} alt=""/>
-            </div>
 
-            <div className="titleHeaderSection">
-                <h2>Explore The Neightborhood</h2>
-                <p>Your New City Awaits</p>
-            </div> 
 
         {/*The code below if for if we dont want to dynamically generate the 
             grid, property images prices etc... using map function and the object array called
@@ -220,14 +213,56 @@ const Home = () => {
             </div> 
 
             */}
-           
 
 
-    
+      </div>{/*end of homepagePropertyGrid */}
+
+
+            <div className="imageCarousel">
+                <img src={`${pathToImagesFolderFromHere}${images[currentImageIndex].src}`} alt=""/>
+                <div className="carouselOverlay">
+                    <h2>Our Most Elegant Properties</h2>
+                    <p>Learn more about our finest properties what we can offer you and your family</p>
+                    <button>Explore</button>
+                </div>
+            </div>
+
+            <div className="titleHeaderSection">
+                <h2>Explore The Neightborhood</h2>
+                <p>Your New City Awaits</p>
+            </div>
+
+            <div className="citiesSection">
+
+                <div className="citiesSectionColumn">
+                    <div>
+                        <p>City Image 1</p>
+                        <p>City Image 2</p>
+                    </div>
+                </div>
+
+                <div className="citiesSectionColumn">
+                    <div>
+                        <p>City Image 1</p>
+                        <p>City Image 2</p>
+                    </div>
+                </div>
+
+                <div className="citiesSectionColumn">
+                    <div>
+                        <p>City Image 1</p>
+                        <p>City Image 2</p>
+                        <p>City Image 3</p>
+                    </div>
+                </div>
+
+
+            </div>
+
+ 
 
 
 
-      </div>
     </>
   );
 };
