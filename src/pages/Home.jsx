@@ -1,68 +1,99 @@
-import React, { useEffect, useState } from 'react'
-import NavBar from '../components/Nav/NavBar'
-import HeroSection from '../components/HeroSection'
-import '../App.css'
-import house1 from '../assets/house1.jpg'
-import images from '../assets/images.json'
-
-
+import React, { useEffect, useState } from "react";
+import NavBar from "../components/Nav/NavBar";
+import HeroSection from "../components/HeroSection";
+import "../App.css";
+import house1 from "../assets/house1.jpg";
+import images from "../assets/images.json";
 
 const Home = () => {
+  const pathToImagesFolderFromHere = "../src/assets/";
+  const firstImage = images[0];
 
-    const pathToImagesFolderFromHere = '../src/assets/';
-    const firstImage = images[0];
+  //these variables are for the image Carousel seen on the homepage
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+
+  useEffect(()=>{
+    console.log("the useEffect ran");
+
+    
+    const intervalId = setInterval(()=>{
+        
+        console.log("The value of currentImageIndex is: " + currentImageIndex);
+        
+        setCurrentImageIndex((prevIndex)=>{
+            console.log("We incremented prevIndex to " + prevIndex);
+            return (prevIndex + 1) % images.length;
+          
+        }); 
+        
+        
+    },5000); 
+    
+    return () => clearInterval(intervalId);
+    
+
+  },[images.length]);
 
   return (
     <>
-         <NavBar/>
-         <HeroSection/>
+      <NavBar />
+      <HeroSection />
 
-         <div className="homepageGridHeader">
-            <h2>Our Most Exclusive</h2>
-            <p>Choose your future destiny</p>
+      <div className="titleHeaderSection">
+        <h2>Our Most Exclusive</h2>
+        <p>Choose your future destiny</p>
+      </div>
 
-        </div>
-        
-        <div className="homepagePropertyGrid">
+      <div className="homepagePropertyGrid">
+        {
+          images.map((image, index) => {
+            return (
+              <div className="homepageGridItem" key={index}>
+                <div className="gridProperyImage">
+                  <a href="">
+                    <img
+                
+                src={`${pathToImagesFolderFromHere}${image.src}`}
+                      alt={`${image.alt}`}
+                    />
+                  </a>
+                </div>
+                <div className="gridPropertyDetails">
+                  <h2>Property Descriptive Title</h2>
 
-            {
-                images.map((image,index)=>{
+                  <p className="itemPrice">$3750/mth</p>
 
-                    return (
-                    <div className="homepageGridItem" key={index}>
-                       
-                        <div className="gridProperyImage">
-                            <a href=""><img src={`${pathToImagesFolderFromHere}${image.src}`} alt={`${image.alt}`}/></a>
-                        </div>
-                        <div className="gridPropertyDetails">
+                  <p className="gridPropertyType">HOUSE</p>
+                  <img
+                
+                src="../src/assets/beds-bathrooms-sqfootage-icon.jpg"
+                    alt=""
+                  />
+                </div>
+              </div>
+            );
+          }) //end of map
+        }
 
-                            <h2>Property Descriptive Title</h2>
+            <div className="imageCarousel">
+                <img src={`${pathToImagesFolderFromHere}${images[currentImageIndex].src}`} alt=""/>
+            </div>
 
-                            <p className="itemPrice">
-                                $3750/mth
-                            </p>
+            <div className="titleHeaderSection">
+                <h2>Explore The Neightborhood</h2>
+                <p>Your New City Awaits</p>
+            </div> 
 
-                            <p className="gridPropertyType">
-                                HOUSE
-                            </p>
-                            <img src="../src/assets/beds-bathrooms-sqfootage-icon.jpg" alt="" />
-                        </div>
-
-                    </div>  
-                    )
-
-                }) //end of map 
-          
-            }
-
-            {/*The code below if for if we dont want to dynamically generate the 
+        {/*The code below if for if we dont want to dynamically generate the 
             grid, property images prices etc... using map function and the object array called
             images */}
-            {/*
+        {/*
             
             <div className="homepageGridItem">
                 <div className="gridProperyImage">
-                    <a href=""><img src={`${pathToImagesFolderFromHere}${firstImage.src}`} alt="something" /></a>
+                    <a href=""><img src={`${pathToIm
+                    agesFolderFromHere}${firstImage.src}`} alt="something" /></a>
                 </div>
                 <div className="gridPropertyDetails">
 
@@ -82,28 +113,8 @@ const Home = () => {
 
             <div className="homepageGridItem">
                 <div className="gridProperyImage">
-                    <a href="../"><img src="" alt="" /></a>
-                </div>
-                <div className="gridPropertyDetails">
-
-                    <h2>Property Descriptive Title</h2>
-
-                    <div className="itemPrice">
-                        $3750/mth
-                    </div>
-
-                    <div className="gridPropertyType">
-                        HOUSE
-                    </div>
-                </div>
-
-            </div>
-
-
-
-            <div className="homepageGridItem">
-                <div className="gridProperyImage">
-                    <a href="../"><img src="" alt="" /></a>
+                    <a href="../"><img src="" alt="" />
+                    </a>
                 </div>
                 <div className="gridPropertyDetails">
 
@@ -124,7 +135,8 @@ const Home = () => {
 
             <div className="homepageGridItem">
                 <div className="gridProperyImage">
-                    <a href="../"><img src="" alt="" /></a>
+                    <a href="../"><img src="" alt="" />
+                    </a>
                 </div>
                 <div className="gridPropertyDetails">
 
@@ -145,7 +157,8 @@ const Home = () => {
 
             <div className="homepageGridItem">
                 <div className="gridProperyImage">
-                    <a href="../"><img src="" alt="" /></a>
+                    <a href="../"><img src="" alt="" />
+                    </a>
                 </div>
                 <div className="gridPropertyDetails">
 
@@ -166,7 +179,30 @@ const Home = () => {
 
             <div className="homepageGridItem">
                 <div className="gridProperyImage">
-                    <a href="../"><img src="" alt="" /></a>
+                    <a href="../"><img src="" alt="" />
+                    </a>
+                </div>
+                <div className="gridPropertyDetails">
+
+                    <h2>Property Descriptive Title</h2>
+
+                    <div className="itemPrice">
+                        $3750/mth
+                    </div>
+
+                    <div className="gridPropertyType">
+                        HOUSE
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div className="homepageGridItem">
+                <div className="gridProperyImage">
+                    <a href="../"><img src="" alt="" />
+                    </a>
                 </div>
                 <div className="gridPropertyDetails">
 
@@ -184,14 +220,16 @@ const Home = () => {
             </div> 
 
             */}
-        
-        </div>
+           
 
 
-        
-    </>
     
-  )
-}
 
-export default Home
+
+
+      </div>
+    </>
+  );
+};
+
+export default Home;

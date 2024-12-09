@@ -11,18 +11,26 @@ p{
 }
 
 body {
-    background-color: #f2f2f2;
+    
   }
 
-.hero img{
-    border: 1px solid red;
-    max-width: 100%;
-    height: auto;
-    
+.hero{
+    background-image: url(../src/assets/house1.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 650px; /* Adjust the height as needed */
 }
 
 
-.homepageGridHeader{
+.hero img{
+
+   opacity: 0;
+    
+} 
+
+
+.titleHeaderSection{
     border: 1px solid red;
     width: 100%;
     height: 200px;
@@ -35,14 +43,14 @@ body {
     
 }
 
-.homepageGridHeader h2{
-    font-size: 50px;
+.titleHeaderSection h2{
+    font-size: 40px;
     font-weight: 400;
     margin-bottom: 0;
 }
 
-.homepageGridHeader p{
-    font-size: 30px;
+.titleHeaderSection p{
+    font-size: 25px;
     font-weight: 400;
 }
 
@@ -84,6 +92,40 @@ body {
     width:100%;
     
 }
+
+.imageCarousel {
+    border: 1px solid blue;
+    width: 100%;
+    height:600px;
+    overflow: hidden;
+}
+
+.imageCarousel img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure images fill the container */  
+   /* animation: image-transition 5s infinite ease-out; */
+}
+
+
+/*
+@keyframes image-transition {
+    0% {
+      opacity: 1;
+    }
+   
+    50% {
+      opacity: 0;
+    }
+   
+    100% {
+      opacity: 1;
+    }
+  }
+
+ */ 
+
+
 
 /*device screen sizes*/
 
