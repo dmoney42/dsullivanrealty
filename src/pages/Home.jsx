@@ -218,6 +218,7 @@ const Home = () => {
       </div>{/*end of homepagePropertyGrid */}
 
 
+
             <div className="imageCarousel">
                 <img src={`${pathToImagesFolderFromHere}${images[currentImageIndex].src}`} alt=""/>
                 <div className="carouselOverlay">
@@ -235,25 +236,47 @@ const Home = () => {
             <div className="citiesSection">
 
                 <div className="citiesSectionColumn">
-                    <div>
-                        <p>City Image 1</p>
-                        <p>City Image 2</p>
+
+                    <div className="citySectionItem1">
+                        <p>City image</p>
                     </div>
+
+                    <div className="citySectionItem2">
+                    <img src="../src/assets/house1.jpg" alt="" />
+                    </div>
+
                 </div>
 
-                <div className="citiesSectionColumn">
-                    <div>
-                        <p>City Image 1</p>
-                        <p>City Image 2</p>
-                    </div>
-                </div>
 
                 <div className="citiesSectionColumn">
-                    <div>
+
+                    <div className="citySectionItem2">
                         <p>City Image 1</p>
+                    </div>
+
+                    <div className="citySectionItem1">
                         <p>City Image 2</p>
+                    </div>
+
+                </div>
+
+
+                <div className="citiesSectionColumn">
+                    
+                    <div className="citySectionItem1">
+                        <p>City Image 1</p>
+                    </div>
+
+                    
+                    <div className="citySectionItem1">
+                        <p>City Image 2</p>
+                    </div>
+
+                    
+                    <div className="citySectionItem1">
                         <p>City Image 3</p>
                     </div>
+
                 </div>
 
 
