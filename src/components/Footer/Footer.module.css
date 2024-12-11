@@ -1,6 +1,75 @@
 .FooterBar{
-    border: 1px solid red;
+    border: 2px solid #e0e0e0;
     width: 100%;
-    height: 400px;
+    height: auto;
+    display:flex;
+    color: #000;
+
+}
+
+.footerAboutWrap{
+    /*border: 1px solid red; */
+    height:100%;
+    width:50%;
+    padding:20px 0 0 20px;
+}
+
+.footerAboutWrap img{
+    width: 50%;
+}
+
+.footerNavWrap{
+    /* border: 1px solid red; */
+    height:100%;
+    width:50%;
+    text-align: center;
+
+}
+
+.footerNavWrap ul {
+    list-style: none;
+    padding: 25px 0px 0px 60px;
+    margin: 10 10 0 0;
+    text-align: left;
+  }
+  
+  .footerNavWrap ul li {
+    margin: 0 5px;
+  }
+
+  .footerNavWrap ul li:before {
+    content: "> ";
+  }
+
+@media(max-width:767px){
+    .FooterBar{
+        flex-direction: column;
+        align-items: center;  
+        text-align: center;
+    }
+
+    .footerLogo{
+        width:100%;
+    }
+
+    .footerAboutWrap img{
+        width: 100%;
+    }
+    
+
+    .footerNavWrap ul {
+        list-style: none;
+        text-align: left;
+    }
+
+
+}
+
+/*any device that is at least 768px or wider (tablet siz) get these styles*/
+@media(min-width: 768px) {
+
+}
+
+@media(min-width: 1026px) {
 
 }
