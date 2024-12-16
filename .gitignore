@@ -1,0 +1,22 @@
+# Operating system files
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Log files
+logs/
+
+# IDE specific files
+.idea/
+.vscode/
+
+# Testing files
+coverage/
+.nyc_output/
+
+# Build output
+build/
+dist/
+
+# Local configuration
+.env
