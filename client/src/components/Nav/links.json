@@ -19,7 +19,12 @@
         {
             "label": "Contact",
             "href": "/contact" 
+        },
+        
+        {
+            "label": "Sign Up",
+            "href": "/sign-up" 
         }
-            
+                 
     ]
 }
