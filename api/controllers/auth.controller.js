@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import { errorHandler } from "../utils/error.js";
 
 export const signup = async (request, response, next) => {
-    //console.log("The signup request from the client is: " + JSON.stringify(request.body));
+    console.log("The signup request from the client is: " + JSON.stringify(request.body));
 
     const {username, email, password} = request.body;
     const hashedPassword = bcrypt.hashSync(password, 10);
@@ -11,7 +11,8 @@ export const signup = async (request, response, next) => {
 
     try {
         await newUser.save();
-        response.status(201).json("User created successfully!")
+        console.log("User created successfully!");
+        response.status(201).json("User created successfully!");
     } catch (error) {
        next(errorHandler(500, error.message));
     }

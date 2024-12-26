@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
 import userRouter from "./routes/user.route.js";
@@ -19,6 +20,8 @@ mongoose.connect(`mongodb+srv://${encodedUsername}:${encodedPassword}@${host}/?r
 
 const app = express();
 
+app.use(cors());
+
 app.use(express.json());
 
 app.listen(3000, ()=>{
@@ -27,6 +30,10 @@ app.listen(3000, ()=>{
 
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
+
+/*************************************************************************** */
+/*************************************************************************** */
+/*************************************************************************** */
 
 app.use((error, request, response, next)=>{
     const statusCode = error.statusCode || 500;
