@@ -7,7 +7,7 @@ const Footer = () => {
   return (
   <>
       <div className={styles['FooterBar']}>
-          <div class={styles['footerAboutWrap']}>
+          <div className={styles['footerAboutWrap']}>
             <div className="footerLogo"><img src={Logo} alt="" /></div>
               <div className="footerAbout">
                 <p>Lorem ipsum dolor sit amet, consectetur 
@@ -20,7 +20,7 @@ const Footer = () => {
               </div>
           </div>
 
-          <div class={styles['footerNavWrap']}>
+          <div className={styles['footerNavWrap']}>
                 <ul>
                   <li>Home</li>
                   <li>About</li>
