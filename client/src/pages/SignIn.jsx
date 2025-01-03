@@ -3,12 +3,14 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from '../components/Nav/NavBar';
 import "../App.css";
+import {useDispatch} from 'react-redux';
+import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
 
 const SignIn = () => {
 
-
-    const[error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+    //const[error, setError] = useState(null);
+   // const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({});
 
     const navigate = useNavigate();
@@ -27,7 +29,8 @@ const SignIn = () => {
         
       
         try {
-            setLoading(true);
+            //setLoading(true);
+            dispatch(signInStart());
             const response = await fetch("http://localhost:3000/api/auth/signin", {
                 method: "POST",
                 headers: {
@@ -41,8 +44,9 @@ const SignIn = () => {
           const data = await response.json();
 
           if (data.success == false) {
-            setLoading(false);
-            setError(data.message);
+            //setLoading(false);
+            dispatch(signInFailure(data.user));
+            //setError(data.message);
             return;
           }
 
@@ -52,20 +56,24 @@ const SignIn = () => {
             // Redirect or other actions
           } else {
               console.error('Cookie "access_token_cookie" was NOT set!');
-          }          
+          }  
+          
+          dispatch(signInSuccess(data.user));
 
           //in either cases set the loading the false
-          setLoading(false);
-          setError(null); //if signup is successfull set error to null
+         // setLoading(false);
+         // setError(null); //if signup is successfull set error to null
+
           navigate("/");
 
           console.log("Signin success:", data);
 
 
         } catch (error) {
-            setLoading(false);
+          dispatch(signInFailure(data.user));
+            //setLoading(false);
           // This is the CRUCIAL part - handle the error here!
-            setError(error.message);
+            //setError(error.message);
         }
         
     }
