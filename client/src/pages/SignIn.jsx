@@ -3,17 +3,18 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from '../components/Nav/NavBar';
 import "../App.css";
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
 
 const SignIn = () => {
 
     const dispatch = useDispatch();
+    const { loading, error } = useSelector((state)=> state.user);
     //const[error, setError] = useState(null);
    // const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({});
 
-    const navigate = useNavigate();
    
     const handleChange = (e) =>{
         setFormData({...formData, [e.target.id]: e.target.value})
@@ -43,6 +44,9 @@ const SignIn = () => {
       
           const data = await response.json();
 
+          console.log("Document cookies after login:", document.cookie); // Debug cookies
+
+
           if (data.success == false) {
             //setLoading(false);
             dispatch(signInFailure(data.user));
@@ -58,7 +62,7 @@ const SignIn = () => {
               console.error('Cookie "access_token_cookie" was NOT set!');
           }  
           
-          dispatch(signInSuccess(data.user));
+          dispatch(signInSuccess(data));
 
           //in either cases set the loading the false
          // setLoading(false);

@@ -38,14 +38,27 @@ export const signin = async (request, response, next) =>{
             console.log("The passwords match!");
         }
 
-        const token = jwt.sign({id: validUser._id}, process.env.JWT_SECRET);
-        const {password: pass, ...restOfOjbect} = validUser;
+        const token = jwt.sign({id: validUser._id}, process.env.JWT_SECRET,{expiresIn: "1h"});
+        console.log("JWT Secret is: ", process.env.JWT_SECRET);
+        const {password: pass, ...restOfOjbect} = validUser.toObject();
         //response.cookie('access_token_cookie', token, {httpOnly: true}).status(200).json("User token achieved and user is logged in");
         /** below We want to see what object validUser returns and to exclude the password*/
-        response.cookie('access_token_cookie', token, {httpOnly: true}).status(200).json(restOfOjbect);
+        response.cookie('access_token_cookie', token, {
+            httpOnly: true,
+           //secure: process.env.NODE_ENV === 'production',
+            sameSite: 'lax',
+            path: '/',
+        });
+        
+        console.log("The Set-Cookie header is:", response.getHeaders()['set-cookie']);
+        response.status(200).json({success: true, token, user: restOfOjbect});
+       // response.status(200).json({success: true, user: restOfOjbect});
+
+
+        
       
 
     } catch (error) {
-        next(error);
+        next(errorHandler(500,"Internal Server Erorr during sign-in"));
     }
 }
