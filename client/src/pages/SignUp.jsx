@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from '../components/Nav/NavBar';
 import "../App.css";
+import OAuth from '../components/OAuth';
+
 
 const SignUp = () => {
 
@@ -73,6 +75,7 @@ const SignUp = () => {
                 <button className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95">
                     {loading ? "Loading..." : "Sign Up"}
                 </button>
+                <OAuth />
             </form>
 
             <div className='flex gap-2 mt-5'>
@@ -80,6 +83,7 @@ const SignUp = () => {
                 <Link to={"/sign-in"}>
                     <span className='text-blue-500'>Sign In</span>
                 </Link>
+
             </div>
             {error && <p className="text-red-500 m">{error}</p>}
         </div>
