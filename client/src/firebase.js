@@ -4,7 +4,6 @@ import { initializeApp } from "firebase/app";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-console.log("The environmental variable shown by vite are: " + JSON.stringify(import.meta.env.VITE_FIREBASE_API_KEY));
 
 const firebaseConfig = {
   apiKey: "AIzaSyDn8XjbuqWxGgx8O47YeyMuVLRAUMiEBHc",

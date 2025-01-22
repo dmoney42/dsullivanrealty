@@ -54,11 +54,52 @@ export const signin = async (request, response, next) =>{
         response.status(200).json({success: true, token, user: restOfOjbect});
        // response.status(200).json({success: true, user: restOfOjbect});
 
-
-        
-      
-
     } catch (error) {
         next(errorHandler(500,"Internal Server Erorr during sign-in"));
     }
-}
+};
+
+
+export const google = async (request, response, next) =>{
+    console.log("we recived your google OAuth request. The body received is: ", request.body)
+    try {
+        const user = await User.findOne({
+            email: request.body.email
+        });
+
+        if(user){
+            const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);
+            const {password, ...restOfOjbect} = user._doc;
+            response.cookie('access_token_cookie', token, {
+                httpOnly: true,
+               //secure: process.env.NODE_ENV === 'production',
+                sameSite: 'lax',
+                path: '/',
+            });
+            response.status(200).json({success: true, token, user: restOfOjbect});
+        }else{
+            const generatedPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
+            const hashedPassword = bcrypt.hashSync(generatedPassword, 10);
+            const newUser = new User({
+                username: request.body.name.split(" ").join("").toLowerCase() + Math.random().toString(36).slice(-8),
+                email: request.body.email,
+                password: hashedPassword,
+                avatar: request.body.photo
+            });
+
+            await newUser.save();
+            const token = jwt.sign({ id: newUser._id}, process.env.JWT_SECRET);
+            const {password, ...restOfOjbect} = newUser._doc;
+            response
+                .cookie('access_token_cookie', token, {
+                    httpOnly: true,
+                    sameSite: 'lax',
+                    path: '/',
+                })
+                .status(200)
+                .json({ success: true, token, user: restOfOjbect });
+        }
+    } catch (error) {
+        next(error);
+    }
+};
