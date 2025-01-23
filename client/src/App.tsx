@@ -3,6 +3,8 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Home from './pages/Home';
 import SignUp from './pages/SignUp.jsx';
 import SignIn from './pages/SignIn.jsx';
+import Profile from './pages/Profile.jsx';
+import PrivateRoute from './components/PrivateRoute.js';
 
 
 function App() {
@@ -15,6 +17,9 @@ function App() {
           <Route path='/' element={<Home/>}/>
           <Route path='/sign-up' element={<SignUp/>}/>
           <Route path='/sign-in' element={<SignIn/>}/>
+          <Route element={<PrivateRoute/>}>
+              <Route path='/profile' element={<Profile/>}/>
+          </Route>
           {/*
           <Route path='/about' element={<Home/>}/>
           <Route path='/properties' element={<Home/>}/>

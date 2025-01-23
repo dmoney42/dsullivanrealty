@@ -15,15 +15,15 @@ const Home = () => {
 
 
   useEffect(()=>{
-    console.log("the useEffect ran");
+    //console.log("the useEffect ran");
 
     
     const intervalId = setInterval(()=>{
         
-        console.log("The value of currentImageIndex is: " + currentImageIndex);
+        //console.log("The value of currentImageIndex is: " + currentImageIndex);
         
         setCurrentImageIndex((prevIndex)=>{
-            console.log("We incremented prevIndex to " + prevIndex);
+            //console.log("We incremented prevIndex to " + prevIndex);
             return (prevIndex + 1) % images.length;
           
         }); 

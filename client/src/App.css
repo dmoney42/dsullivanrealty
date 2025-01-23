@@ -205,7 +205,62 @@ we can create a dark see through box so our white text wont blend in with the im
     object-fit: cover;
 }
 
+.ProfileWrap{
+    padding: 12px;
+    max-width: 32rem;
+    margin: 0 auto;
+}
 
+
+.ProfileWrap>h1{
+    font-size: 30px;
+    line-height: 36px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 28px;
+    margin-bottom: 28px;
+}
+
+.ProfileWrap>form{
+    display:flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profilePageImage{
+    border-radius: 9999px;
+    width: 96px;
+    height: auto;
+    object-fit: cover;
+    cursor: pointer;
+    margin: 0px auto;
+}
+
+.profilePageUserName{
+    border: 2px solid #e5e7eb; 
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.ProfileWrap>form button{
+    background-color: #374151;
+    color: #ffffff;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    transition: opacity 0.2s;
+}
+
+.ProfileWapBottom{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.ProfileWapBottom>span{
+    color: red;
+    cursor: pointer;
+}
 
 
 

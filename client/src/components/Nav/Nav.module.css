@@ -30,3 +30,11 @@
     text-decoration: none;
     color: rgb(14,34,14)
 }
+
+
+.profileImageContainer{
+   width:30px;
+   height:auto;
+   border: 1px solid red;
+
+}

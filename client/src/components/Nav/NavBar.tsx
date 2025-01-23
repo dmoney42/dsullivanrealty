@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './Nav.module.css';
 import { links } from './links.json';
 import Logo from '../../assets/dsullivanrealty-logo.jpg'
+import { useSelector } from 'react-redux';
 
 
 type Link = {
@@ -11,6 +12,9 @@ type Link = {
 }
 
 const NavBar: React.FC<{}> = () => {
+
+  const {currentUser} = useSelector((state) => state.user);
+
   return (
     <nav className={styles.navbar}>
 
@@ -30,6 +34,31 @@ const NavBar: React.FC<{}> = () => {
             )
           })
         }
+
+        <div>
+
+          {
+            currentUser ? (
+              <>
+              {//console.log("Avatar URL:", currentUser.avatar)
+              }
+              
+              {//console.log("Current User:", currentUser)
+                }
+              <div className={styles['profileImageContainer']}>
+                <a href="/profile"><img src={currentUser.user.avatar} alt="avatar" /></a>
+              </div> 
+            </>
+              
+            ) : (
+              
+              <div className='link'>
+                <a href="/sign-in">Sign In</a>
+              </div>
+
+            )
+          }
+        </div>
 
       </div>
 
