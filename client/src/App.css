@@ -262,6 +262,22 @@ we can create a dark see through box so our white text wont blend in with the im
     cursor: pointer;
 }
 
+.profile-image-upload-message{
+    text-align: center;
+}
+
+.profile-image-upload-error-message{
+    color: red;
+}
+
+.profile-image-uploading-progress-message{
+    color: #374151;
+}
+
+.profile-image-upload-success-message{
+    color: green;
+}
+
 
 
 /*
