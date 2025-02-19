@@ -16,6 +16,8 @@ const Profile = () => {
     const [fileUploadError, setFileUploadError] = useState(false);
     const [formData, setFormData] = useState({});
 
+    console.log(formData);
+
     useEffect(()=>{
         if(file){
             handleFileUpload(file);
@@ -50,6 +52,10 @@ const Profile = () => {
         );
     }
 
+    const handleChange = (e) => {
+        console.log('youre inside of the handleChange function');
+        setFormData({...formData, [e.target.id]: e.target.value});
+    }
 
 
   return (
@@ -77,9 +83,27 @@ const Profile = () => {
                 }
                 </p>
 
-                <input type="text" className="profilePageUserName" id="username" placeholder="username" defaultValue={currentUser.user.username}/>
-                <input type="text" className="profilePageUserName" id="email" placeholder="email" defaultValue={currentUser.user.email}/>
-                <input type="password" className="profilePageUserName" id="password" placeholder="password"/>
+                <input 
+                    type="text" 
+                    className="profilePageUserName" 
+                    id="username" placeholder="username" 
+                    defaultValue={currentUser.user.username}
+                    onChange={handleChange}
+                />
+                <input type="text" 
+                    className="profilePageUserName" 
+                    id="email" 
+                    placeholder="email" 
+                    defaultValue={currentUser.user.email}
+                    onChange={handleChange}
+                />
+
+                <input type="password" 
+                    className="profilePageUserName" 
+                    id="password" 
+                    placeholder="password"
+                    onChange={handleChange}
+                />
                 <button>Update</button>
             </form>
 

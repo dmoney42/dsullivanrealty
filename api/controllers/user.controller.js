@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import User from "../models/user.model.js";
+import { errorHandler } from "../utils/error.js";
 
 export const test = (request, response) =>{
     response.send("Test route being called from a controller section of the app");
