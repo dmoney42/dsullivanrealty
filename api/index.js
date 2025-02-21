@@ -23,8 +23,8 @@ mongoose.connect(`mongodb+srv://${encodedUsername}:${encodedPassword}@${host}/?r
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true
+    origin: "http://localhost:5173",
+    credentials: true,  // ✅ Allows cookies to be sent
 }));
 
 app.use(express.json());

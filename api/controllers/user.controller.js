@@ -7,6 +7,16 @@ export const test = (request, response) =>{
 }
 
 export const updateUser = async (request, response, next) => {
+    console.log("We received your request to update the user.");
+
+
+
+    // ✅ Log request body (Should contain username/email/password)
+    console.log("Request Body:", request.body);
+
+    // ✅ Log request params (Should contain user ID)
+    console.log("Request Params ID:", request.params.id);
+
     if(request.user.id !== request.params.id) return next(errorHandler(401, "You can only update your own account."));
 
     try {
@@ -26,7 +36,10 @@ export const updateUser = async (request, response, next) => {
             },
             { new: true}
         );
-
+        
+        // ✅ Log updated user (Should show new username)
+        console.log("Updated User:", updatedUser);
+                
         const { password, ...restOfArray} = updatedUser._doc;
         response.status(200).json(restOfArray);
     } catch (error) {

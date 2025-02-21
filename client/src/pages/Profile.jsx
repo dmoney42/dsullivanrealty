@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
 import NavBar from '../components/Nav/NavBar';
-import { useSelector } from 'react-redux';
 import { useRef, useState } from 'react';
 import {getDownloadURL, getStorage, ref, uploadBytesResumable} from 'firebase/storage';
 import app from '../firebase';
 import "../App.css";
+//redux imports
+import { useSelector, useDispatch } from 'react-redux';
+import { updateUserStart, updateUserSuccess, updateUserFailure } from '../redux/user/userSlice';
 
 
 const Profile = () => {
@@ -15,14 +17,18 @@ const Profile = () => {
     const [filePerc, setFilePerc] = useState(0);
     const [fileUploadError, setFileUploadError] = useState(false);
     const [formData, setFormData] = useState({});
+    const dispatch = useDispatch();
 
-    console.log(formData);
+    console.log(JSON.stringify(formData));
+    console.log("Updated currentUser:", currentUser.user.username);
+
 
     useEffect(()=>{
         if(file){
             handleFileUpload(file);
         }
     },[file])
+
 
     const handleFileUpload = (file) => {
         const storage = getStorage(app);
@@ -53,9 +59,48 @@ const Profile = () => {
     }
 
     const handleChange = (e) => {
-        console.log('youre inside of the handleChange function');
+        console.log("You're inside of the handlechange function");
         setFormData({...formData, [e.target.id]: e.target.value});
-    }
+    };
+
+
+
+    const handleSubmit = async (e) => {
+        console.log("you're inside the handlesubmit function");
+        e.preventDefault();
+
+        console.log("Form Data being sent to backend:", formData);
+
+
+        try {
+            dispatch(updateUserStart());
+            
+            const response = await fetch (`http://localhost:3000/api/user/update/${currentUser.user._id}`,{
+                method: "PUT",
+                headers: {
+                    "Content-Type" : "application/json",
+                },
+                credentials: "include",  // ✅ Ensure cookies are sent
+                body: JSON.stringify(formData),
+
+            });
+
+            const data = await response.json();
+
+            if(!data.success) {
+                dispatch(updateUserFailure(data.message));
+                return;
+            }
+
+            dispatch(updateUserSuccess(data));
+
+
+            console.log("Updated Redux state:", data);
+
+        } catch (error) {
+            dispatch(updateUserFailure(error.message));
+        }
+    };
 
 
   return (
@@ -63,7 +108,7 @@ const Profile = () => {
         <NavBar />
         <div className="ProfileWrap">
             <h1>Profile</h1> 
-            <form action="">
+            <form onSubmit={handleSubmit} action="">
                 <input 
                 onChange={(e)=>{setFile(e.target.files[0])}}
                 type="file" accept="image/" ref={fileRef} hidden/>
@@ -87,14 +132,14 @@ const Profile = () => {
                     type="text" 
                     className="profilePageUserName" 
                     id="username" placeholder="username" 
-                    defaultValue={currentUser.user.username}
+                    value={formData.username || currentUser.user.username}
                     onChange={handleChange}
                 />
                 <input type="text" 
                     className="profilePageUserName" 
                     id="email" 
                     placeholder="email" 
-                    defaultValue={currentUser.user.email}
+                    value={formData.email || currentUser.user.email}
                     onChange={handleChange}
                 />
 
@@ -102,6 +147,7 @@ const Profile = () => {
                     className="profilePageUserName" 
                     id="password" 
                     placeholder="password"
+                    value={formData.password || ""}
                     onChange={handleChange}
                 />
                 <button>Update</button>

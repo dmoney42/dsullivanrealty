@@ -28,6 +28,8 @@ const OAuth = () => {
               photo: result.user.photoURL
 
             }),
+            credentials: "include", // 🔥 This is required for cookies to be sent and received
+
         });
 
         const data = await response.json();

@@ -71,10 +71,20 @@ export const google = async (request, response, next) =>{
             const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);
             const {password, ...restOfOjbect} = user._doc;
             response.cookie('access_token_cookie', token, {
+                /*
                 httpOnly: true,
-               //secure: process.env.NODE_ENV === 'production',
-                sameSite: 'lax',
-                path: '/',
+                secure: process.env.NODE_ENV === "production" ? true : false,  // Only secure in production
+                sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",  // Fix for cross-origin
+                path: "/",
+                maxAge: 60 * 60 * 1000, // 1 hour
+                */
+                
+                httpOnly: true,
+                secure: process.env.NODE_ENV === "production", // Ensures secure cookies in production
+                sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax", // Required for cross-origin requests
+                path: "/",
+                maxAge: 60 * 60 * 1000, // 1 hour
+                
             });
             response.status(200).json({success: true, token, user: restOfOjbect});
         }else{
