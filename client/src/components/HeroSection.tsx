@@ -9,7 +9,7 @@ const HeroSection = () => {
     <>
 
     <section className="hero">
-      <img src={HeroImage2} alt="house hero image" />
+      <img src={HeroImage2} alt="house hero image single family" />
     </section>
 
 
