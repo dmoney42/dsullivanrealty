@@ -5,7 +5,8 @@ import {getDownloadURL, getStorage, ref, uploadBytesResumable} from 'firebase/st
 import app from '../firebase';
 import "../App.css";
 //redux imports
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppSelector } from '../redux/hooks';
+import { useDispatch } from 'react-redux';
 import { updateUserStart, updateUserSuccess, updateUserFailure } from '../redux/user/userSlice';
 
 
@@ -13,10 +14,11 @@ const Profile = () => {
     
     const fileRef = useRef(null);
     const [file, setFile] = useState(undefined);
-    const {currentUser, loading, error} = useSelector((state) => state.user);
+    const { currentUser, loading, error } = useAppSelector((state) => state.user);
     const [filePerc, setFilePerc] = useState(0);
     const [fileUploadError, setFileUploadError] = useState(false);
     const [formData, setFormData] = useState({});
+    const [updateSuccess, setUpdateSuccess] = useState(false);
     const dispatch = useDispatch();
 
     console.log(JSON.stringify(formData));
@@ -150,9 +152,14 @@ const Profile = () => {
                     value={formData.password || ""}
                     onChange={handleChange}
                 />
-                <button>Update</button>
+                <button disabled={loading}>
+                    {
+                        loading ? "Loading..." : "Update"
+                    }
+                </button>
             </form>
-
+            <p>{error ? error : ''}</p>
+            <p>{updateSuccess ? "Profile updated" : ''}</p>
 
             <div className="ProfileWapBottom">
                 <span className="">Delete account</span>

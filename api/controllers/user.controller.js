@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import User from "../models/user.model.js";
 import { errorHandler } from "../utils/error.js";
+import { request, response } from "express";
 
 export const test = (request, response) =>{
     response.send("Test route being called from a controller section of the app");
@@ -45,4 +46,22 @@ export const updateUser = async (request, response, next) => {
     } catch (error) {
         next(error);
     }
-}
+};
+
+export const deleteUser = async(request, response, next) => {
+     console.log("we received your request to delete the user");
+     /*
+    if(request.user.id !== request.params.id){
+        return next(errorHandler(401,"You can only delete your own account"));
+    }
+
+    try {
+        await User.findByIdAndDelete(request.params.id);
+        response.clearCookie('access_token');
+        response.status(200).json("User has been deleted..");
+    } catch (error) {
+        next(error);
+    }
+        */
+
+};

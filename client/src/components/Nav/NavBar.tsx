@@ -2,7 +2,8 @@ import React from 'react'
 import styles from './Nav.module.css';
 import { links } from './links.json';
 import Logo from '../../assets/dsullivanrealty-logo.jpg'
-import { useSelector } from 'react-redux';
+//import { RootState } from '../../redux/store';
+import { useAppSelector } from '../../redux/hooks';
 
 
 type Link = {
@@ -13,7 +14,7 @@ type Link = {
 
 const NavBar: React.FC<{}> = () => {
 
-  const {currentUser} = useSelector((state) => state.user);
+  const { currentUser } = useAppSelector((state) => state.user);
 
   return (
     <nav className={styles.navbar}>

@@ -1,10 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+export interface UserState {
+    currentUser: any; // You can replace `any` with your actual user type
+    loading: boolean;
+    error: string | null;
+  }
+
+  const initialState: UserState = {
     currentUser: null,
-    error: null,
     loading: false,
-};
+    error: null,
+  };
 
 const userSlice = createSlice({
     name: 'user',
