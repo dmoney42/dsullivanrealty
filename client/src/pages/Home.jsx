@@ -4,10 +4,64 @@ import HeroSection from "../components/HeroSection";
 import Footer from "../components/Footer/Footer";
 import "../App.css";
 import house1 from "../assets/house1.jpg";
-import images from "../assets/images.json";
+import house2 from "../assets/house2.jpg";
+import house3 from "../assets/house3.jpg";
+import house4 from "../assets/house4.jpg";
+import house5 from "../assets/house5.jpg";
+import house6 from "../assets/house6.jpg";
+
+//city grid images
+import lacityimg from "../assets/los-angeles-city-image.jpg";
+import interiorCouch1 from "../assets/interior-couch-long-rectangle1.jpg";
+import interiorCouch2 from "../assets/interior-couch-long-rectangle2.jpg";
+import miamicity from "../assets/miami-city-image.jpg";
+import newyorkcityimage from "../assets/new-york-cities-image.jpg";
+import sanfranciscocityimage from "../assets/sanfrancisco-city-image.jpg";
+import venicebeachcityimage from "../assets/venice-beach-city-image.jpg";
+
+
+//import images from "../assets/images.json";
+/*were not using the line above because we we have to import every image using
+ ES modules to be able to deploy this app and the images show up on amazon s3*/
+import bedsBathSqFootage from "../assets/beds-bathrooms-sqfootage-icon.jpg"
+
+
+const images = [
+
+    {
+     "src": house1,
+     "alt": "House 1"
+    },
+
+    {
+     "src": house2,
+     "alt": "House 2"
+    },
+
+    {
+     "src": house3,
+     "alt": "House 3"
+    },
+
+    {
+     "src": house4,
+     "alt": "House 4"
+    },
+
+    {
+     "src": house5,
+     "alt": "House 5"
+    },
+
+    {
+     "src": house6,
+     "alt": "House 6"
+    }
+
+];
 
 const Home = () => {
-  const pathToImagesFolderFromHere = "../src/assets/";
+  //const pathToImagesFolderFromHere = "../src/assets/";
   const firstImage = images[0];
 
   //these variables are for the image Carousel seen on the homepage
@@ -55,8 +109,8 @@ const Home = () => {
                         <a href="">
                             <img
                         
-                        src={`${pathToImagesFolderFromHere}${image.src}`}
-                            alt={`${image.alt}`}
+                        src={image.src}
+                            alt={image.alt}
                             />
                         </a>
                         </div>
@@ -68,7 +122,7 @@ const Home = () => {
                         <p className="gridPropertyType">HOUSE</p>
                         <img
                         
-                        src="../src/assets/beds-bathrooms-sqfootage-icon.jpg"
+                        src={bedsBathSqFootage}
                             alt=""
                         />
                         </div>
@@ -81,7 +135,7 @@ const Home = () => {
 
 
             <div className="imageCarousel">
-                <img src={`${pathToImagesFolderFromHere}${images[currentImageIndex].src}`} alt=""/>
+                <img src={images[currentImageIndex].src} alt=""/>
                 <div className="carouselOverlay">
                     <h2>Our Most Elegant Properties</h2>
                     <p>Learn more about our finest properties what we can offer you and your family</p>
@@ -99,7 +153,7 @@ const Home = () => {
                 <div className="citiesSectionColumn">
 
                     <div className="citySectionItem1">
-                        <img src="../src/assets/los-angeles-city-image.jpg" alt="" />
+                        <img src={lacityimg} alt="" />
                         <div className="seeThroughBox"> 
                             <div className="citySectionItemTextWrap">
                                     <p>Los Angelos</p>
@@ -109,7 +163,7 @@ const Home = () => {
                     </div>
 
                     <div className="citySectionItem2">
-                        <img src="../src/assets/interior-couch-long-rectangle1.jpg" alt="" />
+                        <img src={interiorCouch1} alt="" />
                         <div className="seeThroughBox"> 
                             <div className="citySectionItemTextWrap">
                                     <p>Orlando</p>
@@ -124,7 +178,7 @@ const Home = () => {
                 <div className="citiesSectionColumn">
 
                     <div className="citySectionItem2">
-                        <img src="../src/assets/interior-couch-long-rectangle2.jpg" alt="" />
+                        <img src={interiorCouch2} alt="" />
                         <div className="seeThroughBox"> 
                             <div className="citySectionItemTextWrap">
                                     <p>Maryland</p>
@@ -134,7 +188,7 @@ const Home = () => {
                     </div>
 
                     <div className="citySectionItem1">
-                        <img src="../src/assets/miami-city-image.jpg" alt="" />
+                        <img src={miamicity} alt="" />
                         <div className="seeThroughBox"> 
                             <div className="citySectionItemTextWrap">
                                     <p>Miami</p>
@@ -149,7 +203,7 @@ const Home = () => {
                 <div className="citiesSectionColumn">
                     
                     <div className="citySectionItem1">
-                        <img src="../src/assets/new-york-cities-image.jpg" alt="" />
+                        <img src={newyorkcityimage} alt="" />
                         <div className="seeThroughBox"> 
                             <div className="citySectionItemTextWrap">
                                     <p>New York</p>
@@ -160,7 +214,7 @@ const Home = () => {
 
                     
                     <div className="citySectionItem1">
-                        <img src="../src/assets/sanfrancisco-city-image.jpg" alt="" />
+                        <img src={sanfranciscocityimage} alt="" />
                         <div className="seeThroughBox"> 
                             <div className="citySectionItemTextWrap">
                                     <p>San Francisco</p>
@@ -171,7 +225,7 @@ const Home = () => {
 
                     
                     <div className="citySectionItem1">
-                        <img src="../src/assets/venice-beach-city-image.jpg" alt="" />
+                        <img src={venicebeachcityimage} alt="" />
                         <div className="seeThroughBox"> 
                             <div className="citySectionItemTextWrap">
                                     <p>Venice Beach</p>
