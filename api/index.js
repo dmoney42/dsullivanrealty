@@ -12,6 +12,7 @@ const encodedUsername = encodeURIComponent(process.env.MONGODB_USERNAME);
 const encodedPassword = encodeURIComponent(process.env.MONGODB_PASSWORD);
 const host = process.env.MONGODB_HOST;
 const database_name = process.env.DATABASE_NAME;
+const PORT = process.env.PORT || 8081;
 
 mongoose.connect(`mongodb+srv://${encodedUsername}:${encodedPassword}@${host}/?retryWrites=true&w=majority&appName=${database_name}`)
 .then(()=>{
@@ -31,8 +32,8 @@ app.use(express.json());
 app.use(cookieParser());
 
 
-app.listen(3000, ()=>{
-    console.log("Server is running on port 3000");
+app.listen(PORT, ()=>{
+    console.log(`Server is running on port ${PORT}`);
 })
 
 app.use("/api/user", userRouter);
