@@ -5,6 +5,9 @@ import { useDispatch } from 'react-redux';
 import { signInSuccess } from '../redux/user/userSlice';
 import { useNavigate } from 'react-router-dom';
 
+const backendURL = import.meta.env.VITE_BACKEND_URL;
+
+
 const OAuth = () => {
 
   const dispatch = useDispatch();
@@ -17,7 +20,7 @@ const OAuth = () => {
         const auth = getAuth(app);
 
         const result = await signInWithPopup(auth,provider);
-        const response = await fetch("http://localhost:3000/api/auth/google",{
+        const response = await fetch(`${backendURL}/api/auth/google`,{
             method: "POST",
             headers: {
               "Content-Type": "application/json",

@@ -7,6 +7,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
 import OAuth from '../components/OAuth';
 
+const backendURL = import.meta.env.VITE_BACKEND_URL;
+
+
 
 const SignIn = () => {
 
@@ -34,7 +37,7 @@ const SignIn = () => {
         try {
             //setLoading(true);
             dispatch(signInStart());
-            const response = await fetch("http://localhost:3000/api/auth/signin", {
+            const response = await fetch(`${backendURL}/api/auth/signin`, {
                 method: "POST",
                 headers: {
                 "Content-Type": "application/json",

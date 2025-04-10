@@ -5,6 +5,9 @@ import NavBar from '../components/Nav/NavBar';
 import "../App.css";
 import OAuth from '../components/OAuth';
 
+const backendURL = import.meta.env.VITE_BACKEND_URL;
+
+
 
 const SignUp = () => {
 
@@ -30,7 +33,7 @@ const SignUp = () => {
       
         try {
             setLoading(true);
-            const response = await fetch("http://localhost:3000/api/auth/signup", {
+            const response = await fetch(`${backendURL}/api/auth/signup`, {
                 method: "POST",
                 headers: {
                 "Content-Type": "application/json",
