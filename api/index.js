@@ -24,7 +24,7 @@ mongoose.connect(`mongodb+srv://${encodedUsername}:${encodedPassword}@${host}/?r
 const app = express();
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "http://dsullivanrealty-client.s3-website-us-west-2.amazonaws.com",
     credentials: true,  // ✅ Allows cookies to be sent
 }));
 
