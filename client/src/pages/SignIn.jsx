@@ -9,6 +9,7 @@ import OAuth from '../components/OAuth';
 
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 
+console.log("Backend URL from env:", import.meta.env.VITE_BACKEND_URL);
 
 
 const SignIn = () => {
