@@ -49,19 +49,32 @@ export const updateUser = async (request, response, next) => {
 };
 
 export const deleteUser = async(request, response, next) => {
-     console.log("we received your request to delete the user");
-     /*
+
+    console.log("we received your request to delete the user");
+    console.log("The user id requested from the user is:" + JSON.stringify(request.params.id));
+
     if(request.user.id !== request.params.id){
-        return next(errorHandler(401,"You can only delete your own account"));
+        return next(errorHandler(401, "You can only update your own account!"));
     }
 
-    try {
+    try{
         await User.findByIdAndDelete(request.params.id);
         response.clearCookie('access_token');
-        response.status(200).json("User has been deleted..");
+        response.status(200).json("User has been deleted");
+    }catch(error){
+        next(error);
+    }
+
+
+};
+
+
+export const signout = (request, response, next) =>{
+    console.log("We received your request to signout");
+    try {
+        response.clearCookie("access_token_cookie");
+        response.status(200).json({ message: "User has been logged out successfully."});
     } catch (error) {
         next(error);
     }
-        */
-
 };

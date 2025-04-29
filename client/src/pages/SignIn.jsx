@@ -7,9 +7,11 @@ import {useDispatch, useSelector} from 'react-redux';
 import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
 import OAuth from '../components/OAuth';
 
+console.log('VITE_BACKEND_URL =', import.meta.env.VITE_BACKEND_URL);
+
+
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 
-console.log("Backend URL from env:", import.meta.env.VITE_BACKEND_URL);
 
 
 const SignIn = () => {
@@ -74,7 +76,7 @@ const SignIn = () => {
          // setLoading(false);
          // setError(null); //if signup is successfull set error to null
 
-          navigate("/");
+         navigate("/profile");
 
           console.log("Signin success:", data);
 

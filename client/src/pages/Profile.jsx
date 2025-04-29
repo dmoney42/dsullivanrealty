@@ -7,8 +7,12 @@ import "../App.css";
 //redux imports
 import { useAppSelector } from '../redux/hooks';
 import { useDispatch } from 'react-redux';
-import { updateUserStart, updateUserSuccess, updateUserFailure } from '../redux/user/userSlice';
+import { updateUserStart, updateUserSuccess, updateUserFailure, deleteUserStart, deleteUserFailure, deleteUserSuccess, signInSuccess, signInFailure } from '../redux/user/userSlice';
+import { useNavigate } from 'react-router-dom';
 
+/*we import our backend URL and vite will auto choose the backend url (localhost or production) depending if
+were developing locally or live */
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 const Profile = () => {
     
@@ -20,6 +24,7 @@ const Profile = () => {
     const [formData, setFormData] = useState({});
     const [updateSuccess, setUpdateSuccess] = useState(false);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     console.log(JSON.stringify(formData));
     console.log("Updated currentUser:", currentUser.user.username);
@@ -82,7 +87,7 @@ const Profile = () => {
                 headers: {
                     "Content-Type" : "application/json",
                 },
-                credentials: "include",  // ✅ Ensure cookies are sent
+                credentials: "include",  // Ensure cookies are sent
                 body: JSON.stringify(formData),
 
             });
@@ -102,6 +107,62 @@ const Profile = () => {
         } catch (error) {
             dispatch(updateUserFailure(error.message));
         }
+    };
+
+
+    const handleDeleteUser = async () => {
+        console.log("You clicked the delete account link on the front end");
+
+        console.log("The current user is: " + JSON.stringify(currentUser));
+        console.log("The other current user variable is: " + JSON.stringify(currentUser.user._id));
+
+        if (!currentUser || !currentUser.user._id) {
+            console.error('No user ID available for deletion!');
+            return;
+        }
+
+
+        try {
+            dispatch(deleteUserStart());
+            const response = await fetch(`${backendURL}/api/user/delete/${currentUser.user._id}`,{
+                method: "DELETE",
+                credentials: "include",  // Ensure cookies are sent
+            });
+            const data = await response.json();
+            if(data.success === false){
+                dispatch(deleteUserFailure(data.message));
+                return;
+            }
+            dispatch(deleteUserSuccess(data));
+        } catch (error) {
+            dispatch(deleteUserFailure(error.message));
+        }
+
+    };
+
+
+    const handleSignOut = async () => {
+        console.log("The frontend has requested to signout of the account");
+        try {
+            const response = await fetch(`${backendURL}/api/user/signout`,{
+                method: "POST",
+                credentials: "include"
+            });
+
+            if (!response){
+                throw new Error("Failed to sign out");
+            }
+
+            dispatch(signInSuccess(null)); //clears user state of being signed in
+            navigate("/sign-in");
+
+            console.log("Signed out successfully");
+
+        } catch (error) {
+            dispatch(signInFailure(error.message));
+            console.error("Error during sign out:", error.message);
+        }
+
     };
 
 
@@ -162,8 +223,8 @@ const Profile = () => {
             <p>{updateSuccess ? "Profile updated" : ''}</p>
 
             <div className="ProfileWapBottom">
-                <span className="">Delete account</span>
-                <span>Sign Out</span>
+                <span onClick={handleDeleteUser} className="">Delete account</span>
+                <span onClick={handleSignOut}>Sign Out</span>
             </div>
 
         </div>
